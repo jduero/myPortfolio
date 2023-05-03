@@ -1,0 +1,12 @@
+
+<h2 class="text-center">Tic Tac Toe</h2>
+<p> let's play!</p>
+<h5 *ngIf="gameOver">Game Over!</h5>
+<table class="table table-hover border border-primary h-50" >
+  <tr class="text-center border border-primary" *ngFor="let row of board; let i = index">
+    <td class="text-center border border-primary" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
+      {{ cell }}
+    </td>
+  </tr>
+</table>
+<button (click)="resetGame()">Reset Game</button>

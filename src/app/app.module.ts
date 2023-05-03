@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TictactoeComponent } from './components/tictactoe/tictactoe.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TictactoeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+.table td:hover{
+    cursor: pointer;
+    background-color: gainsboro;
+}
+
+.table td{
+    height: 145px;
+    width: 165px;
+}
