@@ -2,9 +2,14 @@
 <h2 class="text-center">Tic Tac Toe</h2>
 <p> let's play!</p>
 <h5 *ngIf="gameOver">Game Over!</h5>
-<table class="table table-hover border border-primary h-50" >
-  <tr class="text-center border border-primary" *ngFor="let row of board; let i = index">
-    <td class="text-center border border-primary" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
+<select class="form-select" aria-label="Default select example" (change)="difficulty($event)">
+  <option value="easy">Easy</option>
+  <option value="medium">Medium</option>
+  <option value="hard">Hard</option>
+</select>
+<table class="table  h-50" >
+  <tr class="border border-primary" *ngFor="let row of board; let i = index">
+    <td class="fs-1 text-center border border-primary" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
       {{ cell }}
     </td>
   </tr>

@@ -13,10 +13,17 @@ export class TictactoeComponent implements OnInit {
   ];
 
   currentPlayer: string = 'X';
-  gameOver! : boolean;
-  constructor() {}
+  gameOver!: boolean;
+  difficultyLevel : string = 'easy';
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  difficulty(event : Event)
+  {
+    this.difficultyLevel = (event.target as HTMLInputElement).value;
+    
+  }
 
   makeMove(row: number, col: number): void {
     if (this.board[row][col] !== '') {
@@ -84,12 +91,250 @@ export class TictactoeComponent implements OnInit {
   aiMove(): void {
     let row: number;
     let col: number;
-    do {
-      row = Math.floor(Math.random() * 3);
-      col = Math.floor(Math.random() * 3);
-    } while (this.board[row][col] !== '');
-    this.board[row][col] = this.currentPlayer;
+    if (this.difficultyLevel === 'hard') {
+      if (this.getWinningMoveHard() === '') {
+        if (this.getWinningMove() === '') {
+          do {
+            row = Math.floor(Math.random() * 3);
+            col = Math.floor(Math.random() * 3);
+          } while (this.board[row][col] !== '');
+          this.board[row][col] = this.currentPlayer;
+        }
+      }
+    } else if(this.difficultyLevel === 'medium') {
+        if (this.getWinningMove() === '') {
+          do {
+            row = Math.floor(Math.random() * 3);
+            col = Math.floor(Math.random() * 3);
+          } while (this.board[row][col] !== '');
+          this.board[row][col] = this.currentPlayer;
+        }
+    }else{
+      do {
+        row = Math.floor(Math.random() * 3);
+        col = Math.floor(Math.random() * 3);
+      } while (this.board[row][col] !== '');
+      this.board[row][col] = this.currentPlayer;
+    }
+    if (this.checkForWinner()) {
+      // Handle game over
+      this.gameOver = true;
+    }
     this.currentPlayer = 'X';
+  }
+  
+  // for medium difficulties
+  getWinningMove(): string {
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+      if (
+        this.board[i][0] !== '' &&
+        this.board[i][0] === this.board[i][1] &&
+        this.board[i][2] === ''
+      ) {
+        return this.board[i][2] = this.currentPlayer;
+      }
+      if (
+        this.board[i][0] !== '' &&
+        this.board[i][0] === this.board[i][2] &&
+        this.board[i][1] === ''
+      ) {
+        return this.board[i][1] = this.currentPlayer;
+      }
+      if (
+        this.board[i][0] === '' &&
+        this.board[i][1] !== '' &&
+        this.board[i][1] == this.board[i][2]
+      ) {
+        return this.board[i][0] = this.currentPlayer;
+      }
+    }
+
+    // Check columns
+    for (let i = 0; i < 3; i++) {
+      if (
+        this.board[0][i] !== '' &&
+        this.board[0][i] === this.board[1][i] &&
+        this.board[2][i] === ''
+      ) {
+        return this.board[2][i] = this.currentPlayer;
+      }
+      if (
+        this.board[2][i] !== '' &&
+        this.board[2][i] === this.board[1][i] &&
+        this.board[0][i] === ''
+      ) {
+        return this.board[0][i] = this.currentPlayer;
+      }
+      if (
+        this.board[2][i] !== '' &&
+        this.board[2][i] === this.board[0][i] &&
+        this.board[1][i] === ''
+      ) {
+        return this.board[1][i] = this.currentPlayer;
+      }
+    }
+
+    // Check diagonals
+    if (
+      this.board[0][0] !== '' &&
+      this.board[0][0] === this.board[1][1] &&
+      this.board[2][2] === ''
+    ) {
+      return this.board[2][2] = this.currentPlayer;
+    }
+    if (
+      this.board[2][2] !== '' &&
+      this.board[0][0] === '' &&
+      this.board[2][2] === this.board[1][1]
+    ) {
+      return this.board[0][0] = this.currentPlayer;
+    }
+    if (
+      this.board[2][2] !== '' &&
+      this.board[1][1] === '' &&
+      this.board[2][2] === this.board[0][0]
+    ) {
+      return this.board[1][1] = this.currentPlayer;
+    }
+    if (
+      this.board[2][0] !== '' &&
+      this.board[0][2] === '' &&
+      this.board[2][0] === this.board[1][1]
+    ) {
+      return this.board[0][2] = this.currentPlayer;
+    }
+    if (
+      this.board[0][2] !== '' &&
+      this.board[2][0] === '' &&
+      this.board[0][2] === this.board[1][1]
+    ) {
+      return this.board[2][0] = this.currentPlayer;
+    }
+    if (
+      this.board[0][2] !== '' &&
+      this.board[1][1] === '' &&
+      this.board[0][2] === this.board[2][0]
+    ) {
+      return this.board[1][1] = this.currentPlayer;
+    }
+
+    // Return null if there is no winner
+    return '';
+  }
+
+  getWinningMoveHard() : string{
+    
+    let aiSymbol = 'O';
+    this.currentPlayer = aiSymbol;
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+      if (
+        this.board[i][0] !== '' &&
+        this.board[i][0] === this.currentPlayer &&
+        this.board[i][0] === this.board[i][1] &&
+        this.board[i][2] === ''
+      ) {
+        return this.board[i][2] = this.currentPlayer;
+      }
+      if (
+        this.board[i][0] !== '' &&
+        this.board[i][0] === this.currentPlayer &&
+        this.board[i][0] === this.board[i][2] &&
+        this.board[i][1] === ''
+      ) {
+        return this.board[i][1] = this.currentPlayer;
+      }
+      if (
+        this.board[i][0] === '' &&
+        this.board[i][1] !== '' &&
+        this.board[i][1] === this.currentPlayer &&
+        this.board[i][1] == this.board[i][2]
+      ) {
+        return this.board[i][0] = this.currentPlayer;
+      }
+    }
+
+    // Check columns
+    for (let i = 0; i < 3; i++) {
+      if (
+        this.board[0][i] !== '' &&
+        this.board[0][i] === this.currentPlayer &&
+        this.board[0][i] === this.board[1][i] &&
+        this.board[2][i] === ''
+      ) {
+        return this.board[2][i] = this.currentPlayer;
+      }
+      if (
+        this.board[2][i] !== '' &&
+        this.board[2][i] === this.currentPlayer &&
+        this.board[2][i] === this.board[1][i] &&
+        this.board[0][i] === ''
+      ) {
+        return this.board[0][i] = this.currentPlayer;
+      }
+      if (
+        this.board[2][i] !== '' &&
+        this.board[2][i] === this.currentPlayer &&
+        this.board[2][i] === this.board[0][i] &&
+        this.board[1][i] === ''
+      ) {
+        return this.board[1][i] = this.currentPlayer;
+      }
+    }
+
+    // Check diagonals
+    if (
+      this.board[0][0] !== '' &&
+      this.board[0][0] === this.currentPlayer &&
+      this.board[0][0] === this.board[1][1] &&
+      this.board[2][2] === ''
+    ) {
+      return this.board[2][2] = this.currentPlayer;
+    }
+    if (
+      this.board[2][2] !== '' &&
+      this.board[2][2] === this.currentPlayer &&
+      this.board[0][0] === '' &&
+      this.board[2][2] === this.board[1][1]
+    ) {
+      return this.board[0][0] = this.currentPlayer;
+    }
+    if (
+      this.board[2][2] !== '' &&
+      this.board[2][2] === this.currentPlayer &&
+      this.board[1][1] === '' &&
+      this.board[2][2] === this.board[0][0]
+    ) {
+      return this.board[1][1] = this.currentPlayer;
+    }
+    if (
+      this.board[2][0] !== '' &&
+      this.board[2][0] === this.currentPlayer &&
+      this.board[0][2] === '' &&
+      this.board[2][0] === this.board[1][1]
+    ) {
+      return this.board[0][2] = this.currentPlayer;
+    }
+    if (
+      this.board[0][2] !== '' &&
+      this.board[0][2] === this.currentPlayer &&
+      this.board[2][0] === '' &&
+      this.board[0][2] === this.board[1][1]
+    ) {
+      return this.board[2][0] = this.currentPlayer;
+    }
+    if (
+      this.board[0][2] !== '' &&
+      this.board[0][2] === this.currentPlayer &&
+      this.board[1][1] === '' &&
+      this.board[0][2] === this.board[2][0]
+    ) {
+      return this.board[1][1] = this.currentPlayer;
+    }
+
+    // Return null if there is no winner
+    return '';
   }
 
   resetGame(): void {
