@@ -1,9 +1,61 @@
-.table td:hover{
+td:hover {
     cursor: pointer;
     background-color: gainsboro;
 }
 
-.table td{
+.table td {
     height: 145px;
     width: 165px;
+
+}
+
+td {
+    border: thick solid black;
+    border-radius: 10px;
+    padding: 15px;
+    height: 145px;
+    width: 165px;
+    font-size: 60px;
+}
+
+table {
+    border-collapse: unset;
+}
+
+
+.table-container {
+    position: relative;
+}
+
+.table-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+.table-container table {
+    z-index: 2;
+}
+
+.table-container p {
+    text-align: center;
+    font-size: 8rem;
+    color: red;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

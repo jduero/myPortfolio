@@ -1,17 +1,20 @@
-
 <h2 class="text-center">Tic Tac Toe</h2>
 <p> let's play!</p>
-<h5 *ngIf="gameOver">Game Over!</h5>
 <select class="form-select" aria-label="Default select example" (change)="difficulty($event)">
   <option value="easy">Easy</option>
   <option value="medium">Medium</option>
   <option value="hard">Hard</option>
 </select>
-<table class="table  h-50" >
-  <tr class="border border-primary" *ngFor="let row of board; let i = index">
-    <td class="fs-1 text-center border border-primary" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
-      {{ cell }}
-    </td>
-  </tr>
-</table>
-<button (click)="resetGame()">Reset Game</button>
+<div class="table-container">
+  <table class="w-100  h-50">
+    <tr class="" *ngFor="let row of board; let i = index">
+      <td class="text-center" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
+        {{ cell }}
+      </td>
+    </tr>
+  </table>
+  <div class="overlay" *ngIf="gameOver">
+    <p>Game Over!</p>
+  </div>
+</div>
+<button class="btn btn-primary" (click)="resetGame()">Reset Game</button>
