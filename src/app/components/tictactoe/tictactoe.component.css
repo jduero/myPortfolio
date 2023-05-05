@@ -39,16 +39,26 @@ table {
     animation-duration: 2s;
 }
 
+
 .table-container table {
     z-index: 2;
 }
 
 .table-container p {
     text-align: center;
-    font-size: 8rem;
+    font-size: 5rem;
     color: red;
 }
 
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  .fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+  }
 
 @keyframes fadeIn {
     from {

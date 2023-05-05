@@ -1,13 +1,25 @@
 <h2 class="text-center">Tic Tac Toe</h2>
 <p> let's play!</p>
-<select class="form-select" aria-label="Default select example" (change)="difficulty($event)">
-  <option value="easy">Easy</option>
-  <option value="medium">Medium</option>
-  <option value="hard">Hard</option>
-</select>
+<div class="mb-3 row">
+  <label class="col-md-2 pe-0 d-flex align-items-center text-nowrap">Difficulty Level:</label>
+  <div class="col-sm-4 ps-4 d-flex justify-content-end">
+    <select class="form-select " aria-label="Select difficulty" (change)="difficulty($event)">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </div>
+  <label class="col-md-3 pe-0 d-flex justify-content-end align-items-center">Player Symbol:</label>
+  <div class="col-sm-3 pl-0">
+    <select class="form-select w-50" aria-label="Select symbol" (change)="changePlayerSymbol($event)">
+      <option value="X">X</option>
+      <option value="O">O</option>
+    </select>
+  </div>
+</div>
 <div class="table-container">
-  <table class="w-100  h-50">
-    <tr class="" *ngFor="let row of board; let i = index">
+  <table class="w-100 h-50" [ngClass]="{'fade-out': isHidden, 'fade-in': !isHidden}">
+    <tr *ngFor="let row of board; let i = index">
       <td class="text-center" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
         {{ cell }}
       </td>
@@ -15,6 +27,10 @@
   </table>
   <div class="overlay" *ngIf="gameOver">
     <p>Game Over!</p>
+    <p *ngIf="!draw; else drawDiv">Player {{winningSymbol == 'O' ? 'O' : 'X'}} wins!</p>
+    <ng-template #drawDiv>
+      <p>Draw!</p>
+    </ng-template>
   </div>
 </div>
 <button class="btn btn-primary" (click)="resetGame()">Reset Game</button>
