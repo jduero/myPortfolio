@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { TictactoeComponent } from './components/tictactoe/tictactoe.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactusComponent } from './components/contactus/contactus.component';
+import { RibbonComponent } from './components/ribbon/ribbon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TictactoeComponent,
-    ContactusComponent
+    ContactusComponent,
+    RibbonComponent
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,7 @@
   <div class="p-5 mb-4 bg-body-tertiary rounded-3">
     <div class="container-fluid py-5">
       <div class="row">
-        <div class="col-md-6 bg-black text-white rounded-4">
+        <div class="col-lg-6 text-white rounded-end bg-color-overlay">
           <h1 class="display-5 fw-bold">Hi I'm Jan, a Software developer</h1>
           <p class="fs-4">I am a highly experienced software developer with over 5 years of experience in technologies
             such as ASP.NET, .NET Core, HTML, CSS, JavaScript, and MSSQL. I have a strong background in building robust
@@ -38,13 +38,7 @@
     </div>
   </div>
   <div class="container-fluid pt-5">
-    <div class="row">
-      <div class="col-md-12 ">
-        <div class="d-flex justify-content-center">
-          <h1> About Me</h1>
-        </div>
-      </div>
-    </div>
+    <h1 class="d-flex justify-content-center"> <app-ribbon [title]="aboutme"></app-ribbon> </h1>
     <div class="row">
       <div class="col-md-6">
         <img src="./assets/img/progammer.png" class="img-fluid" alt="Logo">
@@ -81,13 +75,13 @@
     <div class="row">
       <div class="col-md-12 ">
         <div class="d-flex justify-content-center">
-          <h1> Technical Skills </h1>
+          <app-ribbon [title]="technicalSkills"></app-ribbon>
         </div>
       </div>
     </div>
   </div>
   <div class="pt-5">
-    <h1 class="d-flex justify-content-center"> Contact Me </h1>
+    <h1 class="d-flex justify-content-center"> <app-ribbon [title]="contactme"></app-ribbon> </h1>
     <app-contactus></app-contactus>
   </div>
 </div>
