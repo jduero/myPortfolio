@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-tictactoe',
   templateUrl: './tictactoe.component.html',
   styleUrls: ['./tictactoe.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('1s', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class TictactoeComponent implements OnInit {
   board: string[][] = [
@@ -12,36 +21,85 @@ export class TictactoeComponent implements OnInit {
     ['', '', ''],
   ];
 
+  symbolVisibility: boolean[][] = [
+    [false, false, false],
+    [false, false, false],
+    [false, false, false],
+  ];
+
   currentPlayer: string = 'X';
   gameOver!: boolean;
-  difficultyLevel : string = 'easy';
-  isHidden! : boolean;
-  aiSymbol : string = 'O';
-  winningSymbol! : string;
-  draw! : boolean;
-  constructor() { }
+  difficultyLevel: string = 'easy';
+  isHidden!: boolean;
+  aiSymbol: string = 'O';
+  winningSymbol!: string;
+  draw!: boolean;
+  winningCells: number[][] = [];
 
-  ngOnInit(): void { }
+  constructor() {}
 
-  difficulty(event : Event)
-  {
+  ngOnInit(): void {}
+
+  difficulty(event: Event) {
     this.difficultyLevel = (event.target as HTMLInputElement).value;
     this.resetGame();
-    
   }
 
-  changePlayerSymbol(event : Event){
+  changePlayerSymbol(event: Event) {
     this.currentPlayer = (event.target as HTMLInputElement).value;
-    this.aiSymbol = this.currentPlayer == 'X' ? 'O' : this.currentPlayer == 'O' ? 'X' : 'X';
+    this.aiSymbol =
+      this.currentPlayer == 'X' ? 'O' : this.currentPlayer == 'O' ? 'X' : 'X';
     this.resetGame();
   }
 
+  isWinningCell(row: number, col: number): boolean {
+    return this.winningCells.some((cell) => cell[0] === row && cell[1] === col);
+  }
+
+  isRowWinningCell(row: number): boolean {
+    return (
+      this.board[row][0] !== '' &&
+      this.board[row][0] === this.board[row][1] &&
+      this.board[row][0] === this.board[row][2]
+    );
+  }
+  
+  isColumnWinningCell(column: number): boolean {
+    return (
+      this.board[0][column] !== '' &&
+      this.board[0][column] === this.board[1][column] &&
+      this.board[0][column] === this.board[2][column]
+    );
+  }
+  
+  isLeftDiagonalWinningCell(): boolean {
+    return (
+      this.board[0][0] !== '' &&
+      this.board[0][0] === this.board[1][1] &&
+      this.board[0][0] === this.board[2][2]
+    );
+  }
+  
+  isRightDiagonalWinningCell(): boolean {
+    return (
+      this.board[0][2] !== '' &&
+      this.board[0][2] === this.board[1][1] &&
+      this.board[0][2] === this.board[2][0]
+    );
+  }
+
+  
   makeMove(row: number, col: number): void {
     if (this.board[row][col] !== '') {
       return;
     }
 
+    // Assign the symbol to the cell
     this.board[row][col] = this.currentPlayer;
+
+    // Update the symbol visibility for the cell
+    this.symbolVisibility[row][col] = true;
+
     if (this.checkForWinner()) {
       // Handle game over
       this.gameOver = true;
@@ -59,6 +117,13 @@ export class TictactoeComponent implements OnInit {
         this.board[row][0] === this.board[row][1] &&
         this.board[row][0] === this.board[row][2]
       ) {
+        // Set the winning cells for the row
+        this.winningCells = [
+          [row, 0],
+          [row, 1],
+          [row, 2],
+        ];
+
         return true;
       }
     }
@@ -70,6 +135,13 @@ export class TictactoeComponent implements OnInit {
         this.board[0][col] === this.board[1][col] &&
         this.board[0][col] === this.board[2][col]
       ) {
+        // Set the winning cells for the col
+        this.winningCells = [
+          [0, col],
+          [1, col],
+          [2, col],
+        ];
+
         return true;
       }
     }
@@ -95,7 +167,6 @@ export class TictactoeComponent implements OnInit {
       // Game is over and it's a tie
       this.draw = true;
       return true;
-      
     }
 
     return false;
@@ -107,40 +178,41 @@ export class TictactoeComponent implements OnInit {
     if (this.difficultyLevel === 'hard') {
       if (this.getWinningMoveHard() === '') {
         if (this.getWinningMove() === '') {
-          
           do {
             row = Math.floor(Math.random() * 3);
             col = Math.floor(Math.random() * 3);
           } while (this.board[row][col] !== '');
-          
+
           this.board[row][col] = this.aiSymbol;
+          this.symbolVisibility[row][col] = true;
         }
       }
-    } else if(this.difficultyLevel === 'medium') {
-        if (this.getWinningMove() === '') {
-          do {
-            row = Math.floor(Math.random() * 3);
-            col = Math.floor(Math.random() * 3);
-          } while (this.board[row][col] !== '');
-          
-          this.board[row][col] = this.aiSymbol;
-        }
-    }else{
+    } else if (this.difficultyLevel === 'medium') {
+      if (this.getWinningMove() === '') {
+        do {
+          row = Math.floor(Math.random() * 3);
+          col = Math.floor(Math.random() * 3);
+        } while (this.board[row][col] !== '');
+
+        this.board[row][col] = this.aiSymbol;
+        this.symbolVisibility[row][col] = true;
+      }
+    } else {
       do {
         row = Math.floor(Math.random() * 3);
         col = Math.floor(Math.random() * 3);
       } while (this.board[row][col] !== '');
-      
+
       this.board[row][col] = this.aiSymbol;
+      this.symbolVisibility[row][col] = true;
     }
     if (this.checkForWinner()) {
       // Handle game over
       this.gameOver = true;
       this.winningSymbol = this.aiSymbol;
     }
-    
   }
-  
+
   // for medium difficulties
   getWinningMove(): string {
     // Check rows
@@ -150,21 +222,21 @@ export class TictactoeComponent implements OnInit {
         this.board[i][0] === this.board[i][1] &&
         this.board[i][2] === ''
       ) {
-        return this.board[i][2] = this.aiSymbol;
+        return (this.board[i][2] = this.aiSymbol);
       }
       if (
         this.board[i][0] !== '' &&
         this.board[i][0] === this.board[i][2] &&
         this.board[i][1] === ''
       ) {
-        return this.board[i][1] = this.aiSymbol;
+        return (this.board[i][1] = this.aiSymbol);
       }
       if (
         this.board[i][0] === '' &&
         this.board[i][1] !== '' &&
         this.board[i][1] == this.board[i][2]
       ) {
-        return this.board[i][0] = this.aiSymbol;
+        return (this.board[i][0] = this.aiSymbol);
       }
     }
 
@@ -175,21 +247,21 @@ export class TictactoeComponent implements OnInit {
         this.board[0][i] === this.board[1][i] &&
         this.board[2][i] === ''
       ) {
-        return this.board[2][i] = this.aiSymbol;
+        return (this.board[2][i] = this.aiSymbol);
       }
       if (
         this.board[2][i] !== '' &&
         this.board[2][i] === this.board[1][i] &&
         this.board[0][i] === ''
       ) {
-        return this.board[0][i] = this.aiSymbol;
+        return (this.board[0][i] = this.aiSymbol);
       }
       if (
         this.board[2][i] !== '' &&
         this.board[2][i] === this.board[0][i] &&
         this.board[1][i] === ''
       ) {
-        return this.board[1][i] = this.aiSymbol;
+        return (this.board[1][i] = this.aiSymbol);
       }
     }
 
@@ -199,50 +271,49 @@ export class TictactoeComponent implements OnInit {
       this.board[0][0] === this.board[1][1] &&
       this.board[2][2] === ''
     ) {
-      return this.board[2][2] = this.aiSymbol;
+      return (this.board[2][2] = this.aiSymbol);
     }
     if (
       this.board[2][2] !== '' &&
       this.board[0][0] === '' &&
       this.board[2][2] === this.board[1][1]
     ) {
-      return this.board[0][0] = this.aiSymbol;
+      return (this.board[0][0] = this.aiSymbol);
     }
     if (
       this.board[2][2] !== '' &&
       this.board[1][1] === '' &&
       this.board[2][2] === this.board[0][0]
     ) {
-      return this.board[1][1] = this.aiSymbol;
+      return (this.board[1][1] = this.aiSymbol);
     }
     if (
       this.board[2][0] !== '' &&
       this.board[0][2] === '' &&
       this.board[2][0] === this.board[1][1]
     ) {
-      return this.board[0][2] = this.aiSymbol;
+      return (this.board[0][2] = this.aiSymbol);
     }
     if (
       this.board[0][2] !== '' &&
       this.board[2][0] === '' &&
       this.board[0][2] === this.board[1][1]
     ) {
-      return this.board[2][0] = this.aiSymbol;
+      return (this.board[2][0] = this.aiSymbol);
     }
     if (
       this.board[0][2] !== '' &&
       this.board[1][1] === '' &&
       this.board[0][2] === this.board[2][0]
     ) {
-      return this.board[1][1] = this.aiSymbol;
+      return (this.board[1][1] = this.aiSymbol);
     }
 
     // Return null if there is no winner
     return '';
   }
 
-  getWinningMoveHard() : string{
-    
+  getWinningMoveHard(): string {
     // Check rows
     for (let i = 0; i < 3; i++) {
       if (
@@ -251,7 +322,7 @@ export class TictactoeComponent implements OnInit {
         this.board[i][0] === this.board[i][1] &&
         this.board[i][2] === ''
       ) {
-        return this.board[i][2] = this.aiSymbol;
+        return (this.board[i][2] = this.aiSymbol);
       }
       if (
         this.board[i][0] !== '' &&
@@ -259,7 +330,7 @@ export class TictactoeComponent implements OnInit {
         this.board[i][0] === this.board[i][2] &&
         this.board[i][1] === ''
       ) {
-        return this.board[i][1] = this.aiSymbol;
+        return (this.board[i][1] = this.aiSymbol);
       }
       if (
         this.board[i][0] === '' &&
@@ -267,7 +338,7 @@ export class TictactoeComponent implements OnInit {
         this.board[i][1] === this.aiSymbol &&
         this.board[i][1] == this.board[i][2]
       ) {
-        return this.board[i][0] = this.aiSymbol;
+        return (this.board[i][0] = this.aiSymbol);
       }
     }
 
@@ -279,7 +350,7 @@ export class TictactoeComponent implements OnInit {
         this.board[0][i] === this.board[1][i] &&
         this.board[2][i] === ''
       ) {
-        return this.board[2][i] = this.aiSymbol;
+        return (this.board[2][i] = this.aiSymbol);
       }
       if (
         this.board[2][i] !== '' &&
@@ -287,7 +358,7 @@ export class TictactoeComponent implements OnInit {
         this.board[2][i] === this.board[1][i] &&
         this.board[0][i] === ''
       ) {
-        return this.board[0][i] = this.aiSymbol;
+        return (this.board[0][i] = this.aiSymbol);
       }
       if (
         this.board[2][i] !== '' &&
@@ -295,7 +366,7 @@ export class TictactoeComponent implements OnInit {
         this.board[2][i] === this.board[0][i] &&
         this.board[1][i] === ''
       ) {
-        return this.board[1][i] = this.aiSymbol;
+        return (this.board[1][i] = this.aiSymbol);
       }
     }
 
@@ -306,7 +377,7 @@ export class TictactoeComponent implements OnInit {
       this.board[0][0] === this.board[1][1] &&
       this.board[2][2] === ''
     ) {
-      return this.board[2][2] = this.aiSymbol;
+      return (this.board[2][2] = this.aiSymbol);
     }
     if (
       this.board[2][2] !== '' &&
@@ -314,7 +385,7 @@ export class TictactoeComponent implements OnInit {
       this.board[0][0] === '' &&
       this.board[2][2] === this.board[1][1]
     ) {
-      return this.board[0][0] = this.aiSymbol;
+      return (this.board[0][0] = this.aiSymbol);
     }
     if (
       this.board[2][2] !== '' &&
@@ -322,7 +393,7 @@ export class TictactoeComponent implements OnInit {
       this.board[1][1] === '' &&
       this.board[2][2] === this.board[0][0]
     ) {
-      return this.board[1][1] = this.aiSymbol;
+      return (this.board[1][1] = this.aiSymbol);
     }
     if (
       this.board[2][0] !== '' &&
@@ -330,7 +401,7 @@ export class TictactoeComponent implements OnInit {
       this.board[0][2] === '' &&
       this.board[2][0] === this.board[1][1]
     ) {
-      return this.board[0][2] = this.aiSymbol;
+      return (this.board[0][2] = this.aiSymbol);
     }
     if (
       this.board[0][2] !== '' &&
@@ -338,7 +409,7 @@ export class TictactoeComponent implements OnInit {
       this.board[2][0] === '' &&
       this.board[0][2] === this.board[1][1]
     ) {
-      return this.board[2][0] = this.aiSymbol;
+      return (this.board[2][0] = this.aiSymbol);
     }
     if (
       this.board[0][2] !== '' &&
@@ -346,7 +417,7 @@ export class TictactoeComponent implements OnInit {
       this.board[1][1] === '' &&
       this.board[0][2] === this.board[2][0]
     ) {
-      return this.board[1][1] = this.aiSymbol;
+      return (this.board[1][1] = this.aiSymbol);
     }
 
     // Return null if there is no winner
@@ -354,7 +425,6 @@ export class TictactoeComponent implements OnInit {
   }
 
   resetGame(): void {
-
     this.isHidden = true;
 
     setTimeout(() => {
@@ -365,9 +435,8 @@ export class TictactoeComponent implements OnInit {
       ];
       this.isHidden = false;
     }, 500); // wait for 500ms for the fade out animation to complete
-  
-    
-    //this.currentPlayer = 'X';
+
+    this.draw = false;
     this.gameOver = false;
   }
 }

@@ -21,16 +21,23 @@
   <table class="w-100 h-50" [ngClass]="{'fade-out': isHidden, 'fade-in': !isHidden}">
     <tr *ngFor="let row of board; let i = index">
       <td class="text-center" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
-        {{ cell }}
+        <div class="symbol">
+          <span [@fadeIn]="symbolVisibility[i][j]" *ngIf="cell !== ''" [ngClass]="{
+          'strike-through-row': isRowWinningCell(i),
+          'strike-through-column': isColumnWinningCell(j),
+          'strike-through-diagonal-left': isLeftDiagonalWinningCell() && i === j,
+          'strike-through-diagonal-right': isRightDiagonalWinningCell() && i + j === 2
+          }">{{ cell }}</span>
+        </div>
       </td>
     </tr>
   </table>
-  <div class="overlay" *ngIf="gameOver">
+  <!-- <div class="overlay d-grid align-items-center" *ngIf="gameOver">
     <p>Game Over!</p>
     <p *ngIf="!draw; else drawDiv">Player {{winningSymbol == 'O' ? 'O' : 'X'}} wins!</p>
     <ng-template #drawDiv>
       <p>Draw!</p>
     </ng-template>
-  </div>
+  </div> -->
 </div>
 <button class="btn btn-primary" (click)="resetGame()">Reset Game</button>
