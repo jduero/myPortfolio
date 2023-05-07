@@ -104,11 +104,11 @@ table {
     position: absolute;
     top: 0;
     left: 0;
-    width: 131%;
+    width: 100%;
     height: 10px;
     background-color: red;
     transform-origin: top left; /* Update the transform origin */
-    transform: translateY(calc(-100% + 2px)) rotate(37deg);
+    transform: translateY(-100%) rotate(36deg)
   }
   
   .strike-through-diagonal-right::after {
@@ -123,7 +123,26 @@ table {
     transform: translateY(calc(-100% + 2px)) rotate(-37deg);
   }
   
+  @media (min-width: 768px) {
+    .strike-through-diagonal-left::after {
+      width: 211%;
+      transform: translateY(-100%) rotate(55deg)
+    }
+  }
 
+  @media (min-width: 1024px) {
+    .strike-through-diagonal-left::after {
+      width: 157%;
+      transform: translateY(-100%) rotate(46deg)
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .strike-through-diagonal-left::after {
+      width: 131%;
+      transform: translateY(-100%) rotate(36deg);
+    }
+  }
 
 
 

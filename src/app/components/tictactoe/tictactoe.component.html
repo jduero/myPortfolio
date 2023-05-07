@@ -17,7 +17,7 @@
     </select>
   </div>
 </div>
-<div class="table-container table-responsive">
+<div class="table-container table-responsive-md">
   <table class="w-100 h-50" [ngClass]="{'fade-out': isHidden, 'fade-in': !isHidden}">
     <tr *ngFor="let row of board; let i = index">
       <td class="text-center "  [ngClass]="{
@@ -32,12 +32,12 @@
       </td>
     </tr>
   </table>
-  <div class="overlay d-grid align-items-center" *ngIf="gameOver">
+  <!-- <div class="overlay d-grid align-items-center" *ngIf="gameOver">
     <p>Game Over!</p>
     <p *ngIf="!draw; else drawDiv">Player {{winningSymbol == 'O' ? 'O' : 'X'}} wins!</p>
     <ng-template #drawDiv>
       <p>Draw!</p>
     </ng-template>
-  </div>
+  </div> -->
 </div>
 <button class="glow-on-hover" (click)="resetGame()">Reset Game</button>

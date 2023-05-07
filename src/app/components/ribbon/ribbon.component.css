@@ -3,11 +3,10 @@
 }
   .ribbon-front {
 	background-color: #cc3333;	height: 50px;
-	width: 500px;
+	width: 240px;
 	position: relative;
 	left:-10px;
-	z-index: 2; 
-    font:50px/50px bold Verdana, Geneva, sans-serif; color:#f8f8f8; text-align:center;text-shadow: 0px 1px 2px #cc6666;
+	z-index: 2; font:20px/50px bold Verdana, Geneva, sans-serif; color:#f8f8f8; text-align:center;text-shadow: 0px 1px 2px #cc6666;
 }
 
   .ribbon-front,
@@ -56,7 +55,7 @@
 
   .ribbon-edge-topright,
   .ribbon-edge-bottomright {
-	left: 450px;
+	left: 220px;
 	border-color: transparent transparent transparent #9B1724;
 }
 
@@ -72,19 +71,15 @@
 @-webkit-keyframes flow {
 	0% { left:-20px;opacity: 0;}
 	50% {left:100px;opacity: 0.3;}
-    70% {left:180px;opacity: 0.3;}
-    90%{ left:280px;opacity: 0.3;}
-    100%{ left:380px;opacity: 0;}
+    100%{ left:180px;opacity: 0;}
 }
 @keyframes flow {
 	0% { left:-20px;opacity: 0;}
 	50% {left:100px;opacity: 0.3;}
-    70% {left:180px;opacity: 0.3;}
-    90%{ left:280px;opacity: 0.3;}
-    100%{ left:380px;opacity: 0;}
+    100%{ left:180px;opacity: 0;}
 }
 
-.glow{ background: rgb(255,255,255); width:40px; height:100%; z-index:999; position:absolute;-webkit-animation: flow 2.5s linear infinite;-moz-animation: flow 1.5s linear infinite;-webkit-transform: skew(20deg);
+.glow{ background: rgb(255,255,255); width:40px; height:100%; z-index:999; position:absolute;-webkit-animation: flow 1.5s linear infinite;-moz-animation: flow 1.5s linear infinite;-webkit-transform: skew(20deg);
 	   -moz-transform: skew(20deg);
 	     -o-transform: skew(20deg);background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 1%, rgba(255,255,255,1) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(1%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
