@@ -15,7 +15,7 @@ td {
     padding: 15px;
     height: 145px;
     width: 165px;
-    font-size: 60px;
+    font-size: 63px;
 }
 
 table {
@@ -71,6 +71,7 @@ table {
 }
 
 
+
 .strike-through-row , .strike-through-column , .strike-through-diagonal-left, .strike-through-diagonal-right{
     position: relative;
     z-index: 0;
@@ -80,8 +81,8 @@ table {
     content: '';
     position: absolute;
     top: 50%;
-    left: -150%;
-    width: 400%;
+    left: 0;
+    width: 100%;
     height: 10px;
     background-color: red;
     transform: translateY(-50%);
@@ -90,10 +91,10 @@ table {
   .strike-through-column::after {
     content: '';
     position: absolute;
-    top: -40%;
+    top: 0;
     left: 50%;
     width: 10px;
-    height: 180%;
+    height: 100%;
     background-color: red;
     transform: translateX(-50%);
   }
@@ -101,22 +102,89 @@ table {
   .strike-through-diagonal-left::after {
     content: '';
     position: absolute;
-    top: 38px;
-    left: -92px;
-    width: 575%;
+    top: 0;
+    left: 0;
+    width: 131%;
     height: 10px;
     background-color: red;
-    transform: rotate(37deg) translateY(-50%);
+    transform-origin: top left; /* Update the transform origin */
+    transform: translateY(calc(-100% + 2px)) rotate(37deg);
   }
   
   .strike-through-diagonal-right::after {
     content: '';
     position: absolute;
-    top: 40px;
-    right: -86px;
-    width: 575%;
+    top: 0;
+    right: 0;
+    width: 131%;
     height: 10px;
     background-color: red;
-    transform: rotate(-37deg) translateY(-50%);
+    transform-origin: top right; /* Update the transform origin */
+    transform: translateY(calc(-100% + 2px)) rotate(-37deg);
   }
   
+
+
+
+
+  .glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+
