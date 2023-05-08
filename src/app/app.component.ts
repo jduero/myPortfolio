@@ -10,4 +10,5 @@ export class AppComponent {
   technicalSkills = 'Technical Skills';
   contactme = 'Contact Me';
   aboutme ='About Me';
+  softwareskills = 'Software Skills';
 }

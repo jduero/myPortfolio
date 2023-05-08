@@ -7,13 +7,19 @@ import { TictactoeComponent } from './components/tictactoe/tictactoe.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactusComponent } from './components/contactus/contactus.component';
 import { RibbonComponent } from './components/ribbon/ribbon.component';
+import { AboutmeComponent } from './components/aboutme/aboutme.component';
+import { TechnicalskillsComponent } from './components/technicalskills/technicalskills.component';
+import { SoftwareskillsComponent } from './components/softwareskills/softwareskills.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TictactoeComponent,
     ContactusComponent,
-    RibbonComponent
+    RibbonComponent,
+    AboutmeComponent,
+    TechnicalskillsComponent,
+    SoftwareskillsComponent
   ],
   imports: [
     BrowserModule,

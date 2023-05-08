@@ -44,15 +44,9 @@ button {
     background-image: linear-gradient(to right, rgba(90, 100, 232, 0.9), rgba(84, 96, 234, 0.9));
 }
 
-/* .bg-color-overlay::before{
-    position: absolute;
-    content: '';
-    top: 152px;
-    right: 0;
-    bottom: 0;
-    left: -13px;
-    background-image: linear-gradient(to right, rgba(90, 100, 232, 0.9), rgba(84, 96, 234, 0.9));
-    pointer-events: none;
-    width: 7.8vw;
-    height: 630px;
-} */
+
+img.framed {
+  box-shadow:
+    -50px -50px 0 -40px tomato,
+    50px 50px 0 -40px tomato;
+}

@@ -1,10 +1,10 @@
-<h2 class="text-center">Tic Tac Toe</h2>
-<p> let's play!</p>
+<h2 class="text-center text-white">Tic Tac Toe</h2>
+<h5 class="text-white"> let's play!</h5>
 
 
 <div class="row g-3 align-items-center">
   <div class="col-auto">
-    <label class="col-form-label">Difficulty Level:</label>
+    <label class="col-form-label text-white">Difficulty Level:</label>
   </div>
   <div class="col-auto">
     <select class="form-select " aria-label="Select difficulty" (change)="difficulty($event)">
@@ -14,7 +14,7 @@
     </select>
   </div>
   <div class="col-auto">
-    <label class="col-form-label">Player Symbol:</label>
+    <label class="col-form-label text-white">Player Symbol:</label>
   </div>
   <div class="col-auto">
     <select class="form-select" aria-label="Select symbol" (change)="changePlayerSymbol($event)">
@@ -26,7 +26,7 @@
 <div class="table-container table-responsive-md">
   <table class="w-100 h-50" [ngClass]="{'fade-out': isHidden, 'fade-in': !isHidden}">
     <tr *ngFor="let row of board; let i = index">
-      <td class="text-center " [ngClass]="{
+      <td class="text-center text-white" [ngClass]="{
         'strike-through-row': isRowWinningCell(i),
         'strike-through-column': isColumnWinningCell(j),
         'strike-through-diagonal-left': isLeftDiagonalWinningCell() && i === j,
