@@ -24,19 +24,6 @@
 }
 
 
-.contact-form:before {
-    position: absolute;
-    content: '';
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 630px;
-    border-radius: 6px;
-    background-color: #ffffff;
-    pointer-events: none;
-    right: auto;
-    width: 80vw;
-}
 .particles-js-canvas-el {
     position: absolute;
     left: 0;

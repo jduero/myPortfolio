@@ -257,7 +257,9 @@ p[data-value]:after {
      -moz-linear-gradient( left, #09c, #690);
 }
 
-/* Now we are good to duplicate html code for other skills and then add the css code for the new skill based on data-skill */
 
+h2, p{
+	color: white;
+}
   
 /* THE END */
