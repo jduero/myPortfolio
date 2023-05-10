@@ -122,12 +122,11 @@ table {
 }
 
 @media (min-width: 320px) {
-    .strike-through-diagonal-left::after {
-      width: 222%;
-      transform: translateY(-100%) rotate(56deg);
-    }
+  .strike-through-diagonal-left::after {
+    width: 222%;
+    transform: translateY(-100%) rotate(56deg);
   }
-  
+}
 
 @media (min-width: 768px) {
   .strike-through-diagonal-left::after {
@@ -145,8 +144,37 @@ table {
 
 @media (min-width: 1440px) {
   .strike-through-diagonal-left::after {
-    width: 107%;
-    transform: translateY(-100%) rotate(19deg);
+    width: 125%;
+    transform: translateY(-100%) rotate(35deg);
+  }
+}
+
+/* right diagonal */
+@media (min-width: 320px) {
+  .strike-through-diagonal-right::after {
+    width: 222%;
+    transform: translateY(-100%) rotate(-57deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .strike-through-diagonal-right::after {
+    width: 126%;
+    transform: translateY(-100%) rotate(-32deg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .strike-through-diagonal-right::after {
+    width: 155%;
+    transform: translateY(-100%) rotate(-44deg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .strike-through-diagonal-right::after {
+    width: 125%;
+    transform: translateY(-100%) rotate(-35deg);
   }
 }
 
