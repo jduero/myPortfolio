@@ -1,0 +1,52 @@
+/* Button resets and style */
+button {
+    margin: 15px auto;
+    font-family: "Montserrat";
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 100px;
+    padding: 15px 20px;
+    border: 0px solid #000;   
+    }
+  
+  /* Initiate Auto-Pulse animations */
+  button.pulse-button {
+    animation: borderPulse 1000ms infinite ease-out, colorShift 10000ms infinite ease-in;
+  }
+
+  
+/* Declate color shifting animation */
+@keyframes colorShift {
+    0%, 100% {
+        background: #0045e6;
+    }
+    33% {
+      background: #fb3e3e;
+    }
+    66%{
+      background: #0dcc00;
+    }
+  }
+  
+  /* Declare border pulse animation */
+  @keyframes borderPulse {
+    0% {
+      box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255,.4), 0px 0px 0px 0px rgba(255,255,255,1);
+    }
+    100% {
+      box-shadow: inset 0px 0px 0px 3px rgba(117, 117, 255,.2), 0px 0px 0px 10px rgba(255,255,255,0);
+    }
+  }
+
+
+.bg-color-overlay{
+    background-image: linear-gradient(to right, rgba(90, 100, 232, 0.9), rgba(84, 96, 234, 0.9));
+}
+
+
+img.framed {
+  box-shadow:
+    -50px -50px 0 -40px tomato,
+    50px 50px 0 -40px tomato;
+}

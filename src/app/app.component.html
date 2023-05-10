@@ -1,0 +1,73 @@
+<div>
+  <nav id="nav-menu-bar" class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1"><img src="./assets/img/J.png" alt="Logo" class="img-fluid"
+          style="height: 30px;">an Dev</span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <nav class="nav nav-pills flex-column flex-sm-row">
+          <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#home">Home</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#aboutme">About Me</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#technicalskills">Technical Skills</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="#contactme">Contact Us</a>
+        </nav>
+      </div>
+    </div>
+  </nav>
+  <div class="container gx-0" data-bs-spy="scroll" data-bs-target="#nav-menu-bar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true">
+    <div id="home" class="pt-5 rounded-3">
+      <div class="container-fluid py-5">
+        <div class="row">
+          <div class="col-lg-6 text-white rounded-end ">
+            <h1 class="display-5 fw-bold">Hi I'm Jan, a Software developer</h1>
+            <p class="fs-4">I am a highly experienced software developer with over 5 years of experience in technologies
+              such as ASP.NET, .NET Core, HTML, CSS, JavaScript, and MSSQL. I have a strong background in building
+              robust
+              and
+              scalable web applications and am well-versed in the .NET ecosystem.I am a self-motivated individual who
+              takes
+              pride in delivering high-quality work and able to work well under pressure and can handle multiple
+              projects
+              simultaneously. </p>
+            <button class="pulse-button">Contact Me</button>
+          </div>
+          <div class="col-lg-6 justify-content-center">
+            <app-tictactoe></app-tictactoe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="aboutme" class="container-fluid py-5">
+      <div class="d-flex justify-content-center pb-5"> <app-ribbon [title]="aboutme"></app-ribbon> </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <img src="./assets/img/progammer.png" class="img-fluid framed" alt="random image">
+          <app-ribbon [title]="softwareskills"></app-ribbon>
+          <app-softwareskills></app-softwareskills>
+        </div>
+        <div class="col-md-6 col-sm-12 justify-content-center">
+          <div class="py-5">
+            <app-aboutme></app-aboutme>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="technicalskills" class="container-fluid py-5">
+      <div class="d-flex justify-content-center pb-5">
+        <app-ribbon [title]="technicalSkills"></app-ribbon>
+      </div>
+      <div class="row">
+        <div class="col-12 ">
+          <app-technicalskills></app-technicalskills>
+        </div>
+      </div>
+    </div>
+    <div id="contactme" class="container-fluid py-5">
+      <h1 class="d-flex justify-content-center"> <app-ribbon [title]="contactme"></app-ribbon> </h1>
+      <app-contactus></app-contactus>
+    </div>
+  </div>
+</div>
