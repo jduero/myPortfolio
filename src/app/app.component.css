@@ -45,8 +45,15 @@ button {
 }
 
 
-img.framed {
-  box-shadow:
-    -50px -50px 0 -40px tomato,
-    50px 50px 0 -40px tomato;
+@media (max-width: 768px) {
+  .offcanvas.offcanvas-end.justify-content-end.flex-row {
+    flex-direction: column !important;
+  }
+}
+
+
+@media (min-width: 1024px ) and (max-width: 2560px) {
+  .nav.nav-pills.flex-column {
+    flex-direction: row !important;
+  }
 }
