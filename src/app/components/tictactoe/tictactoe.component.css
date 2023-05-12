@@ -137,8 +137,8 @@ table {
 
 @media (min-width: 1024px) {
   .strike-through-diagonal-left::after {
-    width: 115%;
-    transform: translateY(-100%) rotate(25deg);
+    width: 150%;
+    transform: translateY(-100%) rotate(45deg);
   }
 }
 
@@ -167,7 +167,7 @@ table {
 @media (min-width: 1024px) {
   .strike-through-diagonal-right::after {
     width: 155%;
-    transform: translateY(-100%) rotate(-44deg);
+    transform: translateY(-100%) rotate(-45deg);
   }
 }
 

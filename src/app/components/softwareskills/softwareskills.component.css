@@ -1,117 +1,92 @@
-.circle-wrap {
-    width: 150px;
-    height: 150px;
-    background: #e6e2e7;
-    border-radius: 50%;
+@keyframes progress {
+  0% {
+    --percentage: 0;
   }
-
-  .circle-wrap .circle .mask,
-.circle-wrap .circle .fill {
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  border-radius: 50%;
+  100% {
+    --percentage: var(--value);
+  }
 }
 
-.circle-wrap .circle .mask {
-    clip: rect(0px, 150px, 150px, 75px);
-  }
+@property --percentage {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
 
-/* Visual Studio */
-   .circle-wrap .circle .mask .v-studio {
-    clip: rect(0px, 75px, 150px, 0px);
-    background-color: #9e00b1;
-  }
-  .circle-wrap .circle .mask.full.v-studio,
-  .circle-wrap .circle  .v-studio {
-    animation: v-studio ease-in-out 3s;
-    transform: rotate(135deg);
-  }
+[role="progressbar"] {
+  --percentage: var(--value);
+  --primary: #4158d0;
+  --secondary: white;
+  --size: 200px;
+  --radius: 10px;
+  animation: progress 2s 0.5s forwards;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
 
-  
-  .circle-wrap .circle .mask.full,
-  .circle-wrap .circle .fill .v-studio {
-    animation: v-studio ease-in-out 3s;
-    transform: rotate(135deg);
-  }
+[role="progressbar"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    var(--primary) calc(var(--percentage) * 1%),
+    var(--secondary) 0
+  );
+  mask: radial-gradient(white 55%, transparent 0);
+  mask-mode: alpha;
+  -webkit-mask: radial-gradient(#0000 55%, #000 0);
+  -webkit-mask-mode: alpha;
+}
 
-  /* VS Code */
-  .circle-wrap .circle .mask .vs-code {
-    clip: rect(0px, 75px, 150px, 0px);
-    background-color: #9e00b1;
-  }
-  .circle-wrap .circle .mask.full.vs-code,
-  .circle-wrap .circle  .vs-code {
-    animation: vs-code ease-in-out 3s;
-    transform: rotate(135deg);
-  }
+[role="progressbar"]::after {
+  counter-reset: percentage var(--value);
+  content: counter(percentage) "%";
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 5);
+  color: var(--secondary);
+  border-radius: 10px;
+}
 
-  .circle-wrap .circle .mask.full ,
-  .circle-wrap .circle .fill .vs-code {
-    animation: vs-code ease-in-out 3s;
-    transform: rotate(45deg);
-  }
-  
-  /* MSSQL */
-   
-  .circle-wrap .circle .mask .mssql {
-    clip: rect(0px, 75px, 150px, 0px);
-    background-color: #9e00b1;
-  }
-  .circle-wrap .circle .mask.full.mssql,
-  .circle-wrap .circle  .mssql {
-    animation: mssql ease-in-out 3s;
-    transform: rotate(145deg);
-  }
+.progress-container {
+  text-align: center;
+}
 
-  .circle-wrap .circle .mask.full .mssql,
-  .circle-wrap .circle .fill .mssql {
-    animation: mssql ease-in-out 3s;
-    transform: rotate(80deg);
-  }
+.progress-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
 
-  @keyframes v-studio {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(135deg);
-    }
+@media (max-width: 768px) {
+  [role="progressbar"] {
+    height: 100px;
+    --size: 100px;
   }
+  .progress-title {
+    font-size: 15px;
+  }
+}
 
-  @keyframes vs-code {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(90deg);
-    }
+@media (min-width: 1024px) and (max-width: 2560px) {
+  [role="progressbar"] {
+    height: 100px;
+    --size: 100px;
   }
+  .progress-title {
+    font-size: 15px;
+  }
+}
 
-  @keyframes mssql {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(112deg);
-    }
+@media (max-width: 425px) {
+  [role="progressbar"] {
+    height: 100px;
   }
-
-  .circle-wrap .inside-circle {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: #fff;
-    line-height: 130px;
-    text-align: center;
-    margin-top: 10px;
-    margin-left: 10px;
-    position: absolute;
-    z-index: 100;
-    font-weight: 700;
-    font-size: 2em;
-  }
-
-  h5{
-    color: white;
-  }
+}
