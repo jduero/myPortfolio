@@ -1,26 +1,16 @@
-@keyframes progress {
-  0% {
-    --percentage: 0;
+.circle-wrap {
+    width: 150px;
+    height: 150px;
+    background: #e6e2e7;
+    border-radius: 50%;
+    margin: 0 auto;
   }
-  100% {
-    --percentage: var(--value);
-  }
-}
 
-@property --percentage {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 0;
-}
-
-[role="progressbar"] {
-  --percentage: var(--value);
-  --primary: #4158d0;
-  --secondary: white;
-  --size: 200px;
-  --radius: 10px;
-  animation: progress 2s 0.5s forwards;
-  aspect-ratio: 1;
+  .circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 150px;
+  height: 150px;
+  position: absolute;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
