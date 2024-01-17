@@ -261,5 +261,11 @@ p[data-value]:after {
 h2, p{
 	color: white;
 }
+
+@media (max-width: 425px) {
+	p{
+		width: 80% !important ;
+	}
+  }
   
 /* THE END */
