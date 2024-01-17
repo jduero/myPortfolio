@@ -3,6 +3,7 @@
     height: 150px;
     background: #e6e2e7;
     border-radius: 50%;
+    margin: 0 auto;
   }
 
   .circle-wrap .circle .mask,
