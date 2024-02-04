@@ -12,71 +12,107 @@
   height: 150px;
   position: absolute;
   border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
 }
 
-[role="progressbar"]::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: conic-gradient(
-    var(--primary) calc(var(--percentage) * 1%),
-    var(--secondary) 0
-  );
-  mask: radial-gradient(white 55%, transparent 0);
-  mask-mode: alpha;
-  -webkit-mask: radial-gradient(#0000 55%, #000 0);
-  -webkit-mask-mode: alpha;
-}
-
-[role="progressbar"]::after {
-  counter-reset: percentage var(--value);
-  content: counter(percentage) "%";
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: calc(var(--size) / 5);
-  color: var(--secondary);
-  border-radius: 10px;
-}
-
-.progress-container {
-  text-align: center;
-}
-
-.progress-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: white;
-}
-
-@media (max-width: 768px) {
-  [role="progressbar"] {
-    height: 100px;
-    --size: 100px;
+.circle-wrap .circle .mask {
+    clip: rect(0px, 150px, 150px, 75px);
   }
-  .progress-title {
-    font-size: 15px;
-  }
-}
 
-@media (min-width: 1024px) and (max-width: 2560px) {
-  [role="progressbar"] {
-    height: 150px;
-    --size: 100px;
+/* Visual Studio */
+   .circle-wrap .circle .mask .v-studio {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #9e00b1;
   }
-  .progress-title {
-    font-size: 15px;
+  .circle-wrap .circle .mask.full.v-studio,
+  .circle-wrap .circle  .v-studio {
+    animation: v-studio ease-in-out 3s;
+    transform: rotate(135deg);
   }
-}
 
-@media (max-width: 425px) {
-  [role="progressbar"] {
-    height: 100px;
+  
+  .circle-wrap .circle .mask.full,
+  .circle-wrap .circle .fill .v-studio {
+    animation: v-studio ease-in-out 3s;
+    transform: rotate(135deg);
   }
-}
+
+  /* VS Code */
+  .circle-wrap .circle .mask .vs-code {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #9e00b1;
+  }
+  .circle-wrap .circle .mask.full.vs-code,
+  .circle-wrap .circle  .vs-code {
+    animation: vs-code ease-in-out 3s;
+    transform: rotate(135deg);
+  }
+
+  .circle-wrap .circle .mask.full ,
+  .circle-wrap .circle .fill .vs-code {
+    animation: vs-code ease-in-out 3s;
+    transform: rotate(45deg);
+  }
+  
+  /* MSSQL */
+   
+  .circle-wrap .circle .mask .mssql {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #9e00b1;
+  }
+  .circle-wrap .circle .mask.full.mssql,
+  .circle-wrap .circle  .mssql {
+    animation: mssql ease-in-out 3s;
+    transform: rotate(145deg);
+  }
+
+  .circle-wrap .circle .mask.full .mssql,
+  .circle-wrap .circle .fill .mssql {
+    animation: mssql ease-in-out 3s;
+    transform: rotate(80deg);
+  }
+
+  @keyframes v-studio {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(135deg);
+    }
+  }
+
+  @keyframes vs-code {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(90deg);
+    }
+  }
+
+  @keyframes mssql {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(112deg);
+    }
+  }
+
+  .circle-wrap .inside-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #fff;
+    line-height: 130px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+  }
+
+  h5{
+    color: white;
+  }
